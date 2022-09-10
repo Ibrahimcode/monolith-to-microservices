@@ -1,4 +1,4 @@
-name: Docker image build test
+name: Docker image build and push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  build-docker-images:
+  build-push-docker-images:
 
     runs-on: ubuntu-latest
 
@@ -24,9 +24,15 @@ jobs:
         docker tag udagram-frontend braimo/udagram-frontend:v1
         docker tag reverseproxy braimo/reverseproxy:v1
 
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Push to Docker hub
       run: |
-        echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin # log into docker hub account
         docker push braimo/udagram-api-feed:v1
         docker push braimo/udagram-api-user:v1
         docker push braimo/udagram-frontend:v1
