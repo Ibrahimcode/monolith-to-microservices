@@ -4,22 +4,19 @@ on:
   push:
     branches: [dev]
 
-
 jobs:
   build-docker-images:
-
     runs-on: ubuntu-latest
 
-
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: dev
-    - name: Build the Docker image
-      run: |
-        docker --version # print the version for logging
-        docker compose -f ./docker-compose-build.yaml build --parallel
-        docker tag udagram-api-feed braimo/udagram-api-feed:v1
-        docker tag udagram-api-user braimo/udagram-api-user:v1
-        docker tag udagram-frontend braimo/udagram-frontend:v1
-        docker tag reverseproxy braimo/reverseproxy:v1
+      - uses: actions/checkout@v3
+        with:
+          ref: dev
+      - name: Build the Docker image
+        run: |
+          docker --version # print the version for logging
+          docker compose -f ./docker-compose-build.yaml build --parallel
+          docker tag udagram-api-feed braimo/udagram-api-feed:v2
+          docker tag udagram-api-user braimo/udagram-api-user:v2
+          docker tag udagram-frontend braimo/udagram-frontend:v2
+          docker tag reverseproxy braimo/reverseproxy:v2
