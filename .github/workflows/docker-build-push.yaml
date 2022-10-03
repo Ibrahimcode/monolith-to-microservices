@@ -16,10 +16,10 @@ jobs:
         run: |
           docker --version # print the version for logging
           docker compose -f ./docker-compose-build.yaml build --parallel
-          docker tag udagram-api-feed braimo/udagram-api-feed:v2
-          docker tag udagram-api-user braimo/udagram-api-user:v2
-          docker tag udagram-frontend braimo/udagram-frontend:v2
-          docker tag reverseproxy braimo/reverseproxy:v2
+          docker tag udagram-api-feed braimo/udagram-api-feed:v3
+          docker tag udagram-api-user braimo/udagram-api-user:v3
+          docker tag udagram-frontend braimo/udagram-frontend:v3
+          docker tag reverseproxy braimo/reverseproxy:v3
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -29,7 +29,7 @@ jobs:
 
       - name: Push to Docker hub
         run: |
-          docker push braimo/udagram-api-feed:v2
-          docker push braimo/udagram-api-user:v2
-          docker push braimo/udagram-frontend:v2
-          docker push braimo/reverseproxy:v2
+          docker push braimo/udagram-api-feed:v3
+          docker push braimo/udagram-api-user:v3
+          docker push braimo/udagram-frontend:v3
+          docker push braimo/reverseproxy:v3
